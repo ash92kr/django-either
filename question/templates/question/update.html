@@ -1,0 +1,18 @@
+{% extends 'question/base.html' %}
+
+{% block body_block %}
+    <form action="{% url 'question:update' id=question.id %}" method='post'>  <!--{url 'app_name:name' id=}-->
+        {% csrf_token %}
+        {{form.as_p}}
+        <input type="submit">
+    </form>
+    
+    <!--{% for comment in question.comment_set.all %}-->
+    <!--    <form action="{% url 'question:update' id=comment.id %}" method='post'>-->
+    <!--        {% csrf_token %}-->
+    <!--        {{form.as_p}}-->
+    <!--        <input type="submit">-->
+    <!--    </form>-->
+    <!--{% endfor %}-->
+    
+{% endblock %}

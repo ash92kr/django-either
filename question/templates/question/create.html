@@ -1,0 +1,11 @@
+{% extends 'question/base.html' %}
+
+{% block body_block %}
+    <form action="{% url 'question:create' %}" method="post">
+        {% csrf_token %}
+        <table>
+        {{form.as_table}}  <!--as_p는 한 줄씩 떨어져서 묶음-->
+        </table>
+        <input type="submit"/>
+    </form>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'question/base.html' %}
+
+{% block body_block %}
+
+{% load bootstrap_pagination %}
+
+    <h1>여기는 list입니다.</h1>
+    {% for question in questions %}
+        <h1>{{question.title}}</h1>
+        <a href="{% url 'question:detail' id=question.id %}">글보기</a>
+    {% endfor %}
+    {% bootstrap_paginate questions range=5 show_first_last=True %}
+
+{% endblock %}
