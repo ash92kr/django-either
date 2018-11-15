@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'question',
     'django_seed',
     'bootstrap_pagination',
+    'account',
 ]
 
 MIDDLEWARE = [

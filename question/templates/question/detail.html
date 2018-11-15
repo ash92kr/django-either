@@ -2,6 +2,7 @@
 
 {% block body_block %}
     
+    <h1>{{question.user}}</h1>
     <h1>{{question.title}}</h1>
     <a href="{% url 'question:update' id=question.id %}">수정</a>
     <a href="{% url 'question:delete' id=question.id %}">삭제</a>

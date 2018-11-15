@@ -4,10 +4,8 @@ from .models import Question, Comment   # 현재 폴더 아래 있는 Question c
 class QuestionForm(forms.ModelForm):   # forms의 ModelForm을 상속시킴
     class Meta:
         model = Question
-        fields = '__all__'
+        fields = ['title', 'answerA', 'answerB']
         
-        
-
 class CommentForm(forms.ModelForm):
     class Meta:       
         model = Comment

@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, resolve_url
 from question.forms import QuestionForm, CommentForm   # QuestionForm class를 가져옴
 from .models import Question
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def list(request):
@@ -15,18 +16,22 @@ def list(request):
     
     return render(request, 'question/list.html', {'questions':questions})  # 자동으로 감지하지 못하고 설정 필요
 
-def create(request):
+@login_required
+def create(request):   # 에러 페이지의 모든 데이터는 request에 저장되어 전달된다
     if request.method == "POST":
         # 데이터를 저장하는 로직 - post 방식으로 넘어와야 데이터를 DB에 저장
         form = QuestionForm(request.POST)   # 사용자가 입력한 내용을 폼에 넣어 저장
         if form.is_valid():   # 빈 데이터나 형식에 맞지 않는지 검증
-            form.save()
+            question = form.save(commit=False)
+            question.user = request.user  # user 정보(로그인이 된 사람만 가능)
+            question.save()
             return redirect(resolve_url('question:list'))
     else:  # GET 방식
         # 사용자에게 폼을 만들어 전달
         form = QuestionForm()   # 웹페이지가 직접 폼 내용을 자동으로 담아 건네줌
     return render(request, 'question/create.html', {'form': form})
 
+@login_required
 def detail(request, id):
     question = Question.objects.get(id=id)
     form = CommentForm(initial={'question':id})  # question의 값을 id로 넘김 -> 특정 title에 대한 댓글을 달아 넘길 수 있음

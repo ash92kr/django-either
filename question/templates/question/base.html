@@ -10,6 +10,14 @@
 <body>
     <a href="{% url 'question:create' %}">글 생성</a>
     <div class="container">
+        {% if user.is_authenticated %}  <!--user가 로그인한 상태인가?-->
+            <!--로그아웃 버튼-->
+            <a href="{% url 'account:logout' %}">로그아웃</a>
+        {% else %}
+            <!--로그인 버튼-->
+            <a href="{% url 'account:login' %}">로그인</a>
+        {% endif %}
+        
         {% block body_block %}
         {% endblock %}
     </div>

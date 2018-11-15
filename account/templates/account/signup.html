@@ -1,0 +1,10 @@
+{% extends 'question/base.html' %}
+
+{% block body_block %}
+    <form action="{% url 'account:signup' %}" method="post">
+        {% csrf_token %}
+        {{form.as_p}}
+        {{pro_form.as_p}}
+        <input type="submit">
+    </form>
+{% endblock %}

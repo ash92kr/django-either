@@ -18,5 +18,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('questions/', include('question.urls'))  # questions url이 포함되면 question.urls에 있는 주소를 불러옴
+    path('questions/', include('question.urls')),  # questions url이 포함되면 question.urls에 있는 주소를 불러옴
+    path('accounts/', include('account.urls')),
 ]
